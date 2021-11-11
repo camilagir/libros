@@ -28,6 +28,30 @@
   color: #61dafb;
 }
 
+.botones {
+  display:inline-flex;
+}
+
+.click {
+  margin-top: 1.8rem;
+  margin-left: 1em;
+  margin-right: 1em;
+  height: 1.5rem;
+  font-size:1em;
+  background-color: lightpink;
+}
+
+.numero {
+  font-size: 2em;
+  margin-top: 0.5em;
+}
+
+.agregar {
+  background-color: lightpink;
+  font-size: 1.8em;
+  font-family:'Times New Roman', Times, serif;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
