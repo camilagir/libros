@@ -6,6 +6,10 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
+import ItemList from '../itemList/itemList';
+import { useState, useEffect } from 'react';
+import getProducts from '../../services/handMadePromise';
+
 
 export default function ItemListContainer() {
   const [checked, setChecked] = React.useState([1]);
@@ -23,6 +27,17 @@ export default function ItemListContainer() {
     setChecked(newChecked);
   };
   
+  const [products, setProducts] = useState([])
+    console.log('Los productos estan en el hook', products)
+  
+    useEffect(() => {
+      getProducts
+      .then(res => {
+        setProducts(res)
+      })
+      .catch(err => alert('problema', err))
+    }, [])
+
   return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {[0, 1, 2, 3].map((value) => {
@@ -52,6 +67,9 @@ export default function ItemListContainer() {
           </ListItem>
         );
       })}
+      <ItemList products={products} />
     </List>
   );
 }
+
+
