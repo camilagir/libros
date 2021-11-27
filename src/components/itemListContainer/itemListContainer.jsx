@@ -7,8 +7,9 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import ItemList from '../itemList/itemList';
+import axios from "axios";
 import { useState, useEffect } from 'react';
-import getProducts from '../../services/handMadePromise';
+import { Link } from "react-router-dom";
 
 
 export default function ItemListContainer() {
@@ -27,16 +28,21 @@ export default function ItemListContainer() {
     setChecked(newChecked);
   };
   
-  const [products, setProducts] = useState([])
-    console.log('Los productos estan en el hook', products)
+  const ItemListContainer = ({ greeting }) => {
+    const [products, setProducts] = useState([]);
+    console.log(products);
+
+    const getProductsAxios = async () => {
+      const getAxios = await axios.get("../JSON/data.json");
+      const responseAxios = getAxios.data; 
+      console.log("Respuesta Axios:", responseAxios);
+    };
+    
+    useEffect (() => {
+      setTimeOut (() => getProductsAxios(), 2000);
+    }, []);
+  }
   
-    useEffect(() => {
-      getProducts
-      .then(res => {
-        setProducts(res)
-      })
-      .catch(err => alert('problema', err))
-    }, [])
 
   return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -67,6 +73,10 @@ export default function ItemListContainer() {
           </ListItem>
         );
       })}
+      <h1>ACA VA EL ITEMDETAILCONTAINER</h1>
+      <Link to="/about">
+        <h1>About</h1>
+      </Link>
       <ItemList products={products} />
     </List>
   );

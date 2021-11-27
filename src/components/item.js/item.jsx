@@ -1,15 +1,17 @@
-const Item = ({description, precio, stock, title,}) =>{
+import { Link } from "react-router-dom";
+
+const Item = ({description, precio, stock, title, id}) =>{
     return(
-        <div class="cardUno">
-            <div class="cardDos">
-                <h2>{title}</h2>
-                <h3>{precio}</h3>
-                <p>{description}</p>
-                <p>{stock}</p>
+        <Link to={`/item/${id}`}>
+            <div class="cardUno">
+                <div class="cardDos">
+                    <h2>{title}</h2>
+                    <h3>{precio}</h3>
+                    <p>{description}</p>
+                    <p>{stock}</p>
+                </div>
             </div>
-        </div>
-    )
-}
-
-
-export default Item
+        </Link>
+    );
+};
+export default Item;
