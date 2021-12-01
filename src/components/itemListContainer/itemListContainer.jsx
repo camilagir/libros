@@ -7,7 +7,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import ItemList from '../itemList/itemList';
-import axios from "axios";
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 
@@ -30,21 +29,18 @@ export default function ItemListContainer() {
   
   const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState([]);
-    console.log(products);
-
-    const getProductsAxios = async () => {
-      const getAxios = await axios.get("../JSON/data.json");
-      const responseAxios = getAxios.data; 
-      console.log("Respuesta Axios:", responseAxios);
+    const getProducts = async () => {
+      const getData = await fetch("../JSON/data.json");
+      const dataResponse = await getData.json();
+      console.log("Respuesta de async/await", dataResponse);
     };
     
     useEffect (() => {
-      setTimeOut (() => getProductsAxios(), 2000);
+      setTimeout(() => getProducts(), 2000);
     }, []);
   }
-  
 
-  return (
+    return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-secondary-label-${value}`;
@@ -81,5 +77,3 @@ export default function ItemListContainer() {
     </List>
   );
 }
-
-
